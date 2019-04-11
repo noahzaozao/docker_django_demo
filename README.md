@@ -23,3 +23,7 @@ docker exec -i docker_django_demo_web_1 bash -c 'python manage.py collectstatic'
 docker-compose stop
 docker-compose rm -f
 ```
+
+### Visit your site
+
+[http://localhost:8080/](http://localhost:8080/)
