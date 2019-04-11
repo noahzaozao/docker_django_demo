@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - 0.0.0.0:8000:8000
+    volumes:
+      - ./django_data:/usr/src/app/data
+      - ./django_data/static:/usr/src/app/static
+      - ./django_data/media:/usr/src/app/media
+    environment:
+      - GUNICORN_CMD_ARGS="--workers=2"
+
+  nginx:
+    image: nginx
+    ports:
+      - 0.0.0.0:8080:8080
+    volumes:
+      - ./ngxin_data/:/etc/nginx/conf.d
+      - ./django_data/static:/usr/share/nginx/html/static
+      - ./django_data/media:/usr/share/nginx/html/media
+    links:
+      - web:web
